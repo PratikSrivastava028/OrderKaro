@@ -1,0 +1,26 @@
+[
+  {
+    "_id": { "$oid": "65f000000000000000000001" },
+    "fullName": "Gurpreet Singh",
+    "email": "gurpreet@punjabitadka.com",
+    "password": "Owner@123",
+    "mobile": "9876543210",
+    "role": "owner"
+  },
+  {
+    "_id": { "$oid": "65f000000000000000000004" },
+    "fullName": "Ramesh Verma",
+    "email": "ramesh@southspice.com",
+    "password": "Owner@123",
+    "mobile": "9012345678",
+    "role": "owner"
+  },
+  {
+    "_id": { "$oid": "65f000000000000000000002" },
+    "fullName": "Rahul Sharma",
+    "email": "rahul@gmail.com",
+    "password": "Rahul@123",
+    "mobile": "9123456789",
+    "role": "user"
+  }
+]

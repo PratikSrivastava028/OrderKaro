@@ -1,0 +1,23 @@
+{
+  "shops": [
+    {
+      "name": "7Day's",
+      "city": "Noida",
+      "id": "69e9c66ac00fc9ae25dfdaf3"
+    }
+  ],
+  "items": [
+    {
+      "name": "butter chicken bliss burger",
+      "shop": "69e9c66ac00fc9ae25dfdaf3"
+    },
+    {
+      "name": "the gold standard truffle burger",
+      "shop": "69e9c66ac00fc9ae25dfdaf3"
+    },
+    {
+      "name": "crispy paneer crunch",
+      "shop": "69e9c66ac00fc9ae25dfdaf3"
+    }
+  ]
+}

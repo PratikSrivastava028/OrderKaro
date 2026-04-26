@@ -1,0 +1,42 @@
+[
+  {
+    "_id": { "$oid": "65f100000000000000000001" },
+    "name": "Punjabi Tadka",
+    "image": "example.jpg",
+    "owner": { "$oid": "65f000000000000000000001" },
+    "city": "Noida",
+    "state": "UP",
+    "address": "Sector 3, Near Bijli Ghar",
+    "items": [
+      { "$oid": "65f200000000000000000001" },
+      { "$oid": "65f200000000000000000002" },
+      { "$oid": "65f200000000000000000003" }
+    ]
+  },
+  {
+    "_id": { "$oid": "65f100000000000000000002" },
+    "name": "South Spice",
+    "image": "example.jpg",
+    "owner": { "$oid": "65f000000000000000000004" },
+    "city": "Noida",
+    "state": "UP",
+    "address": "Sector 62",
+    "items": [
+      { "$oid": "65f200000000000000000004" },
+      { "$oid": "65f200000000000000000005" }
+    ]
+  },
+  {
+    "_id": { "$oid": "65f100000000000000000003" },
+    "name": "Burger Junction",
+    "image": "example.jpg",
+    "owner": { "$oid": "65f000000000000000000001" },
+    "city": "Delhi",
+    "state": "Delhi",
+    "address": "Karol Bagh",
+    "items": [
+      { "$oid": "65f200000000000000000006" },
+      { "$oid": "65f200000000000000000007" }
+    ]
+  }
+]

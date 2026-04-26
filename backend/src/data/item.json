@@ -1,0 +1,72 @@
+[
+  {
+    "_id": { "$oid": "65f200000000000000000001" },
+    "name": "paneer butter masala",
+    "image": "example.jpg",
+    "shop": { "$oid": "65f100000000000000000001" },
+    "category": "main-course",
+    "price": 250,
+    "foodType": "veg",
+    "rating": { "average": 4.5, "count": 120 }
+  },
+  {
+    "_id": { "$oid": "65f200000000000000000002" },
+    "name": "chicken butter masala",
+    "image": "example.jpg",
+    "shop": { "$oid": "65f100000000000000000001" },
+    "category": "main-course",
+    "price": 320,
+    "foodType": "non-veg",
+    "rating": { "average": 4.7, "count": 210 }
+  },
+  {
+    "_id": { "$oid": "65f200000000000000000003" },
+    "name": "samosa",
+    "image": "example.jpg",
+    "shop": { "$oid": "65f100000000000000000001" },
+    "category": "snacks",
+    "price": 20,
+    "foodType": "veg",
+    "rating": { "average": 4.2, "count": 500 }
+  },
+  {
+    "_id": { "$oid": "65f200000000000000000004" },
+    "name": "masala dosa",
+    "image": "example.jpg",
+    "shop": { "$oid": "65f100000000000000000002" },
+    "category": "south-indian",
+    "price": 150,
+    "foodType": "veg",
+    "rating": { "average": 4.6, "count": 300 }
+  },
+  {
+    "_id": { "$oid": "65f200000000000000000005" },
+    "name": "idli sambhar",
+    "image": "example.jpg",
+    "shop": { "$oid": "65f100000000000000000002" },
+    "category": "south-indian",
+    "price": 100,
+    "foodType": "veg",
+    "rating": { "average": 4.3, "count": 280 }
+  },
+  {
+    "_id": { "$oid": "65f200000000000000000006" },
+    "name": "veg burger",
+    "image": "example.jpg",
+    "shop": { "$oid": "65f100000000000000000003" },
+    "category": "burgers",
+    "price": 120,
+    "foodType": "veg",
+    "rating": { "average": 4.1, "count": 190 }
+  },
+  {
+    "_id": { "$oid": "65f200000000000000000007" },
+    "name": "chicken burger",
+    "image": "example.jpg",
+    "shop": { "$oid": "65f100000000000000000003" },
+    "category": "burgers",
+    "price": 160,
+    "foodType": "non-veg",
+    "rating": { "average": 4.4, "count": 230 }
+  }
+]
