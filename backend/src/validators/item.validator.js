@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 export const addItemValidation = Joi.object({
-  name: Joi.string().trim().lowercase().required().messages({
+  name: Joi.string().trim().required().messages({
     "string.base": "Item name must be a string",
     "string.empty": "Item name is required",
     "any.required": "Item name is required",
@@ -50,7 +50,7 @@ export const addItemValidation = Joi.object({
 });
 
 export const editItemValidation = Joi.object({
-  name: Joi.string().trim().lowercase().optional().messages({
+  name: Joi.string().trim().optional().messages({
     "string.base": "Item name must be a string",
     "string.empty": "Item name cannot be empty",
   }),

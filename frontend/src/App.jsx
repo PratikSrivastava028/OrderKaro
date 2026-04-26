@@ -17,6 +17,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import SSOCallback from "./pages/SSOCallback";
 
+import { Toaster } from "sonner";
+
 const App = () => {
   const { userData, loading } = useSelector((state) => state.user);
 
@@ -31,53 +33,56 @@ const App = () => {
   }
 
   return (
-    <Routes>
-      <Route
-        path="/register"
-        element={!userData ? <Register /> : <Navigate to={"/"} />}
-      />
+    <>
+      <Toaster position="top-center" richColors />
+      <Routes>
+        <Route
+          path="/register"
+          element={!userData ? <Register /> : <Navigate to={"/"} />}
+        />
 
-      <Route
-        path="/login"
-        element={!userData ? <Login /> : <Navigate to={"/"} />}
-      />
+        <Route
+          path="/login"
+          element={!userData ? <Login /> : <Navigate to={"/"} />}
+        />
 
-      <Route
-        path="/forgot-password"
-        element={!userData ? <ForgotPassword /> : <Navigate to={"/"} />}
-      />
+        <Route
+          path="/forgot-password"
+          element={!userData ? <ForgotPassword /> : <Navigate to={"/"} />}
+        />
 
-      <Route
-        path="/"
-        element={userData ? <Home /> : <Navigate to={"/login"} />}
-      />
-      <Route path="/sso-callback" element={<SSOCallback />} />
+        <Route
+          path="/"
+          element={userData ? <Home /> : <Navigate to={"/login"} />}
+        />
+        <Route path="/sso-callback" element={<SSOCallback />} />
 
-      <Route
-        path="/create-edit-shop"
-        element={userData ? <CreateAndEditShop /> : <Navigate to={"/login"} />}
-      />
+        <Route
+          path="/create-edit-shop"
+          element={userData ? <CreateAndEditShop /> : <Navigate to={"/login"} />}
+        />
 
-      <Route
-        path="/add-item"
-        element={userData ? <AddItem /> : <Navigate to={"/login"} />}
-      />
+        <Route
+          path="/add-item"
+          element={userData ? <AddItem /> : <Navigate to={"/login"} />}
+        />
 
-      <Route
-        path="/edit-item/:itemId"
-        element={userData ? <EditItem /> : <Navigate to={"/login"} />}
-      />
+        <Route
+          path="/edit-item/:itemId"
+          element={userData ? <EditItem /> : <Navigate to={"/login"} />}
+        />
 
-      <Route
-        path="/cart"
-        element={userData ? <Cart /> : <Navigate to={"/login"} />}
-      />
+        <Route
+          path="/cart"
+          element={userData ? <Cart /> : <Navigate to={"/login"} />}
+        />
 
-      <Route
-        path="/checkout"
-        element={userData ? <Checkout /> : <Navigate to={"/login"} />}
-      />
-    </Routes>
+        <Route
+          path="/checkout"
+          element={userData ? <Checkout /> : <Navigate to={"/login"} />}
+        />
+      </Routes>
+    </>
   );
 };
 

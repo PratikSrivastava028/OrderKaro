@@ -53,46 +53,61 @@ export const addItem = async (req, res, next) => {
 
 export const editItem = async (req, res, next) => {
   try {
-    let { name, foodType, price, category } = req.body;
-    let itemId = req.params.itemId;
+    const { name, foodType, price, category } = req.body;
+    const itemId = req.params.itemId;
     let image;
 
-    let oldItem = await ItemModel.findById(itemId);
+    // 1. Fetch item and check existence
+    const oldItem = await ItemModel.findById(itemId);
+    if (!oldItem) {
+      return next(new ErrorResponse(`Item with ID ${itemId} not found`, 404));
+    }
 
+    // 2. Authorization check: Ensure item belongs to the authenticated user's shop
+    const shop = await ShopModel.findOne({ owner: req.user._id });
+    if (!shop || oldItem.shop.toString() !== shop._id.toString()) {
+      return next(
+        new ErrorResponse("Unauthorized: You do not own this item", 403),
+      );
+    }
+
+    // 3. Handle image update if a new file is uploaded
     if (req.file) {
-      let dataURL = getDataURLFromFile(req.file);
+      const dataURL = getDataURLFromFile(req.file);
       image = await uploadToCloudinary(dataURL, next);
-      if (oldItem.image.includes("cloudinary")) {
-        let publicId = getPublicIdFromURL(oldItem.image);
+      
+      // Delete old image from Cloudinary if it exists
+      if (oldItem.image && oldItem.image.includes("cloudinary")) {
+        const publicId = getPublicIdFromURL(oldItem.image);
         await deleteFromCloudinary(publicId, next);
       }
     }
 
+    // 4. Update the item
+    const updateData = {
+      name,
+      foodType,
+      price,
+      category,
+    };
+    if (image) updateData.image = image;
+
     const updatedItem = await ItemModel.findByIdAndUpdate(
       itemId,
-      {
-        name,
-        foodType,
-        price,
-        category,
-        image,
-      },
-      { new: true },
+      updateData,
+      { new: true, runValidators: true },
     );
 
-    const shop = await ShopModel.findOne({ owner: req.user._id }).populate({
+    // 5. Fetch updated shop data with populated items
+    const updatedShop = await ShopModel.findOne({ owner: req.user._id }).populate({
       path: "items",
       options: { sort: { updatedAt: -1 } },
     });
 
-    if (!updatedItem) {
-      return next(new ErrorResponse(`Item with ID ${itemId} not found`, 404));
-    }
-
     res.status(200).json({
       success: true,
       message: "Item updated successfully",
-      shop,
+      shop: updatedShop,
     });
   } catch (error) {
     next(error);

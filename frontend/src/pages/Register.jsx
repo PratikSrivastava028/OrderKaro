@@ -272,7 +272,7 @@ function SignUp() {
               {[
                 { val: "user", label: "🍔 Foodie" },
                 { val: "owner", label: "🍽️ Partner" },
-                { val: "deliveryBoy", label: "🛵 Rider" },
+                // { val: "deliveryBoy", label: "🛵 Rider" },
               ].map(({ val, label }) => (
                 <button
                   key={val}
@@ -302,8 +302,8 @@ function SignUp() {
             >
               <option value="user">🍔 Foodie</option>
               <option value="owner">🍽️ Restaurant Partner</option>
-              <option value="deliveryBoy">🛵 Delivery Rider</option>
-            </select>
+           {/* <option value="deliveryBoy">🛵 Delivery Rider</option>*/}
+                       </select>
           </div>
 
           {/* CTA */}
