@@ -41,7 +41,7 @@ function SignIn() {
   };
 
   const handleGoogleLogin = async () => {
-    toast.info("Starting Google login...");
+    // Get the best available clerk instance
     
     // Get the best available clerk instance
     const clerkInstance = clerk || window.Clerk;
@@ -80,7 +80,6 @@ function SignIn() {
         toast.error("Could not find a valid Clerk sign-in method.");
       }
     } catch (error) {
-      console.error("Google login error:", error);
       toast.error("Google login failed: " + error.message);
     }
   };

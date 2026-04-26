@@ -20,8 +20,6 @@ export default function SSOCallback() {
       syncAttempted.current = true;
 
       try {
-        console.log("Syncing user with backend:", user.primaryEmailAddress?.emailAddress);
-        
         const response = await axiosInstance.post(AUTH_ROUTES.LOGIN_WITH_SSO, {
           email: user.primaryEmailAddress?.emailAddress,
           fullName: user.fullName,
@@ -33,7 +31,6 @@ export default function SSOCallback() {
         dispatch(setUserData(response.data.user));
         navigate("/");
       } catch (error) {
-        console.error("Backend sync error:", error);
         toast.error("Failed to sync account: " + (error.response?.data?.message || error.message));
         navigate("/login");
       }

@@ -28,10 +28,16 @@ export const errorHandler = (err, req, res, next) => {
     err.message = "Invalid token, Please login again!";
   }
 
-  return res.status(err.statusCode).json({
+  const response = {
     success: false,
     message: err.message,
-    errObject: err,
-    errLine: err.stack,
-  });
+  };
+
+  // Only include stack trace and error object in development
+  if (process.env.NODE_ENV === "development") {
+    response.errObject = err;
+    response.errLine = err.stack;
+  }
+
+  return res.status(err.statusCode).json(response);
 };
