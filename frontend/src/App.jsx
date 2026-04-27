@@ -15,6 +15,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Orders from "./pages/Orders";
 import SSOCallback from "./pages/SSOCallback";
 
 import { Toaster } from "sonner";
@@ -80,6 +81,10 @@ const App = () => {
         <Route
           path="/checkout"
           element={userData ? <Checkout /> : <Navigate to={"/login"} />}
+        />
+        <Route
+          path="/my-orders"
+          element={userData ? <Orders /> : <Navigate to={"/login"} />}
         />
       </Routes>
     </>

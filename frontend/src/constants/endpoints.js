@@ -1,6 +1,6 @@
 export const BACKEND_URL =
   import.meta.env.MODE === "development"
-    ? "http://localhost:9000"
+    ? `http://${window.location.hostname}:9000`
     : import.meta.env.VITE_BACKEND_URL || "http://localhost:9000";
 
 export const AUTH_ROUTES = {
@@ -37,4 +37,7 @@ export const ITEM_ROUTES = {
 
 export const ORDER_ROUTES = {
   PLACE_ORDER: `${BACKEND_URL}/api/v1/order/place`,
+  GET_ORDERS: `${BACKEND_URL}/api/v1/order/orders`,
+  UPDATE_ORDER_STATUS: (orderId, shopId) =>
+    `${BACKEND_URL}/api/v1/order/update-status/${orderId}/${shopId}`,
 };

@@ -2,6 +2,7 @@ import { clerkMiddleware } from "@clerk/express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
+import path from "path";
 
 import { FRONTEND_URL } from "./src/config/index.js";
 
@@ -15,6 +16,7 @@ import userRoutes from "./src/routes/user.route.js";
 import webhookRouter from "./src/routes/webhook.route.js";
 
 const app = express();
+const __dirname = path.resolve();
 app.use(
   cors({
     origin: [
@@ -41,6 +43,15 @@ app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/shop", shopRoutes);
 app.use("/api/v1/item", itemRoutes);
 app.use("/api/v1/order", orderRoutes);
+
+// Serving Frontend in Production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+  app.get("(.*)", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../frontend", "dist", "index.html"));
+  });
+}
 
 app.use(errorHandler);
 

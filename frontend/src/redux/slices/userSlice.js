@@ -12,6 +12,7 @@ const userSlice = createSlice({
     itemsInMyCity: [],
     cartItems: [],
     totalAmount: 0,
+    searchQuery: "",
   },
   reducers: {
     setUserData: (state, action) => {
@@ -74,6 +75,9 @@ const userSlice = createSlice({
       state.cartItems = [];
       state.totalAmount = 0;
     },
+    setSearchQuery: (state, action) => {
+      state.searchQuery = action.payload;
+    },
   },
 });
 
@@ -89,6 +93,7 @@ export const {
   updateQuantity,
   removeFromCart,
   clearCart,
+  setSearchQuery,
 } = userSlice.actions;
 
 export default userSlice.reducer;

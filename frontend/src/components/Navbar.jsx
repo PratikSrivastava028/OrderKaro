@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { AUTH_ROUTES } from "../constants/endpoints";
 import axiosInstance from "../lib/axios";
-import { setUserData } from "../redux/slices/userSlice";
+import { setUserData, setSearchQuery } from "../redux/slices/userSlice";
 
 function Navbar() {
   const [showSearch, setShowSearch] = useState(false);
@@ -19,7 +19,7 @@ function Navbar() {
 
   const dispatch = useDispatch();
 
-  const { userData, city, cartItems } = useSelector((state) => state.user);
+  const { userData, city, cartItems, searchQuery } = useSelector((state) => state.user);
   const { shopData } = useSelector((state) => state.owner);
 
   const handleLogout = async () => {
@@ -58,6 +58,8 @@ function Navbar() {
                 type="text"
                 placeholder="Search delicious food…"
                 className="flex-1 text-sm text-stone-700 bg-transparent outline-none placeholder:text-stone-300 min-w-0"
+                value={searchQuery}
+                onChange={(e) => dispatch(setSearchQuery(e.target.value))}
               />
             </div>
           )}
@@ -100,11 +102,17 @@ function Navbar() {
             {/* Owner: My Orders */}
             {userData.role === "owner" && (
               <>
-                <button className="hidden md:flex items-center gap-1.5 bg-orange-50 text-orange-500 hover:bg-orange-100 text-sm font-medium px-3.5 py-2 rounded-full transition-colors cursor-pointer">
+                <button
+                  className="hidden md:flex items-center gap-1.5 bg-orange-50 text-orange-500 hover:bg-orange-100 text-sm font-medium px-3.5 py-2 rounded-full transition-colors cursor-pointer"
+                  onClick={() => navigate("/my-orders")}
+                >
                   <TbReceipt2 size={16} />
                   My Orders
                 </button>
-                <button className="md:hidden w-9 h-9 flex items-center justify-center rounded-full bg-orange-50 text-orange-500 hover:bg-orange-100 transition-colors cursor-pointer">
+                <button
+                  className="md:hidden w-9 h-9 flex items-center justify-center rounded-full bg-orange-50 text-orange-500 hover:bg-orange-100 transition-colors cursor-pointer"
+                  onClick={() => navigate("/my-orders")}
+                >
                   <TbReceipt2 size={17} />
                 </button>
               </>
@@ -124,7 +132,10 @@ function Navbar() {
 
             {/* User: My Orders — desktop */}
             {userData.role === "user" && (
-              <button className="hidden md:flex items-center gap-1.5 bg-orange-50 text-orange-500 hover:bg-orange-100 text-sm font-medium px-3.5 py-2 rounded-full transition-colors cursor-pointer">
+              <button
+                className="hidden md:flex items-center gap-1.5 bg-orange-50 text-orange-500 hover:bg-orange-100 text-sm font-medium px-3.5 py-2 rounded-full transition-colors cursor-pointer"
+                onClick={() => navigate("/my-orders")}
+              >
                 <TbReceipt2 size={16} />
                 My Orders
               </button>
@@ -156,6 +167,8 @@ function Navbar() {
               type="text"
               placeholder="Search delicious food…"
               className="flex-1 text-sm text-stone-700 bg-transparent outline-none placeholder:text-stone-300"
+              value={searchQuery}
+              onChange={(e) => dispatch(setSearchQuery(e.target.value))}
             />
           </div>
         </div>
@@ -171,7 +184,10 @@ function Navbar() {
 
           {/* My Orders — mobile, user only */}
           {userData.role === "user" && (
-            <button className="md:hidden text-left text-sm text-stone-600 hover:text-orange-500 font-medium py-1.5 transition-colors cursor-pointer">
+            <button
+              className="md:hidden text-left text-sm text-stone-600 hover:text-orange-500 font-medium py-1.5 transition-colors cursor-pointer"
+              onClick={() => navigate("/my-orders")}
+            >
               My Orders
             </button>
           )}

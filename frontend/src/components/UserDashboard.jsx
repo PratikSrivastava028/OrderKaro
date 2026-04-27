@@ -132,7 +132,7 @@ function ScrollRow({ children, label, badge }) {
 
 // ── Main component ────────────────────────────────────────────────
 function UserDashboard() {
-  const { city, shopsInMyCity, itemsInMyCity } = useSelector(
+  const { city, shopsInMyCity, itemsInMyCity, searchQuery } = useSelector(
     (state) => state.user,
   );
   const navigate = useNavigate();
@@ -142,14 +142,19 @@ function UserDashboard() {
   // itemsInMyCity already scoped to city by API
   const allItems = itemsInMyCity ?? [];
 
-  // Filter items by active category
-  const filteredItems =
-    activeCategory === "All"
-      ? allItems
-      : allItems.filter(
-          (item) =>
-            item.category === activeCategory.toLowerCase().replace(" ", "-"),
-        );
+  // Filter items by category and search query
+  const filteredItems = allItems.filter((item) => {
+    const matchesCategory =
+      activeCategory === "All" ||
+      item.category === activeCategory.toLowerCase().replace(" ", "-");
+
+    const matchesSearch =
+      !searchQuery ||
+      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.category.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <div className="w-full min-h-screen bg-stone-50 flex flex-col items-center pb-16">
