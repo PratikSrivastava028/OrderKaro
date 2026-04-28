@@ -2,6 +2,7 @@ import { clerkMiddleware } from "@clerk/express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
+import fs from "fs";
 import path from "path";
 
 import { FRONTEND_URL } from "./src/config/index.js";
@@ -59,7 +60,7 @@ app.use("/api/v1/shop", shopRoutes);
 app.use("/api/v1/item", itemRoutes);
 app.use("/api/v1/order", orderRoutes);
     
-import fs from "fs";
+
 
 // Serving Frontend in Production
 if (process.env.NODE_ENV === "production") {
