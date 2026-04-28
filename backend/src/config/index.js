@@ -6,7 +6,7 @@ export const MONGODB_URL = process.env.MONGODB_URL;
 
 export const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
-export const FRONTEND_URL = process.env.FRONTEND_URL;
+export const FRONTEND_URL = process.env.FRONTEND_URL || "https://order-karo-xkoe.onrender.com";
 
 export const NODEMAILER_PASSWORD = process.env.NODEMAILER_PASSWORD;
 export const NODEMAILER_EMAIL = process.env.NODEMAILER_EMAIL;
