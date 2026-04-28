@@ -59,13 +59,18 @@ app.use("/api/v1/shop", shopRoutes);
 app.use("/api/v1/item", itemRoutes);
 app.use("/api/v1/order", orderRoutes);
     
+import fs from "fs";
+
 // Serving Frontend in Production
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+  const frontendPath = path.resolve(__dirname, "../frontend/dist");
+  if (fs.existsSync(frontendPath)) {
+    app.use(express.static(frontendPath));
 
-  app.get(/.*/, (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../frontend", "dist", "index.html"));
-  });
+    app.get(/.*/, (req, res) => {
+      res.sendFile(path.resolve(frontendPath, "index.html"));
+    });
+  }
 }
 
 app.use(errorHandler);
