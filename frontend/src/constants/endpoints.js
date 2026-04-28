@@ -1,7 +1,7 @@
 export const BACKEND_URL =
   import.meta.env.MODE === "development"
     ? `http://${window.location.hostname}:9000`
-    : import.meta.env.VITE_BACKEND_URL || "https://order-karo-t2c6.onrender.com";
+    : "https://order-karo-t2c6.onrender.com";
 
 export const AUTH_ROUTES = {
   REGISTER: `${BACKEND_URL}/api/v1/auth/register`,
