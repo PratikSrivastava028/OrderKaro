@@ -44,8 +44,8 @@ export const login = async (req, res, next) => {
 
     const token = generateToken(user._id);
     res.cookie("token", token, {
-      secure: true,
-      sameSite: "none",
+      secure: false,
+      sameSite: "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
       httpOnly: true,
       path: "/",
@@ -64,8 +64,8 @@ export const login = async (req, res, next) => {
 export const logout = (req, res, next) => {
   try {
     res.clearCookie("token", {
-      secure: true,
-      sameSite: "none",
+      secure: false,
+      sameSite: "strict",
       maxAge: 0,
       httpOnly: true,
       path: "/",
@@ -208,8 +208,8 @@ export const googleAuth = async (req, res, next) => {
 
     const token = generateToken(user._id);
     res.cookie("token", token, {
-      secure: true,
-      sameSite: "none",
+      secure: false,
+      sameSite: "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
       httpOnly: true,
       path: "/",
