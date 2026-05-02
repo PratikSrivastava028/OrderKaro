@@ -4,6 +4,9 @@ import cors from "cors";
 import express from "express";
 import fs from "fs";
 import path from "path";
+import helmet from "helmet";
+import morgan from "morgan";
+import rateLimit from "express-rate-limit";
 
 import { FRONTEND_URL } from "./src/config/index.js";
 
@@ -18,17 +21,37 @@ import webhookRouter from "./src/routes/webhook.route.js";
 
 const app = express();
 const __dirname = path.resolve();
+
+app.use(helmet());
+
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+} else {
+  app.use(morgan("combined"));
+}
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+app.use("/api", apiLimiter);
+
 app.use(
   cors({
     origin: function (origin, callback) {
       if (!origin) return callback(null, true);
-      const allowedOrigins = [
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:5174",
-        "http://127.0.0.1:5174",
-        FRONTEND_URL,
-      ];
+      const isProd = process.env.NODE_ENV === "production";
+      const allowedOrigins = isProd
+        ? [process.env.FRONTEND_URL || FRONTEND_URL]
+        : [
+            "http://localhost:5173",
+            "http://127.0.0.1:5173",
+            "http://localhost:5174",
+            "http://127.0.0.1:5174",
+            FRONTEND_URL,
+          ];
       if (
         allowedOrigins.includes(origin) ||
         origin.startsWith("http://192.168.") ||

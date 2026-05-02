@@ -16,9 +16,10 @@ export const register = async (req, res, next) => {
 
     const token = generateToken(user._id);
 
+    const isProd = process.env.NODE_ENV === "production";
     res.cookie("token", token, {
-      secure: false,
-      sameSite: "strict",
+      secure: isProd,
+      sameSite: isProd ? "none" : "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
       httpOnly: true,
     });
@@ -43,9 +44,10 @@ export const login = async (req, res, next) => {
     if (!isMatch) return next(new ErrorResponse("Invalid Credentials", 401));
 
     const token = generateToken(user._id);
+    const isProd = process.env.NODE_ENV === "production";
     res.cookie("token", token, {
-      secure: false,
-      sameSite: "strict",
+      secure: isProd,
+      sameSite: isProd ? "none" : "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
       httpOnly: true,
       path: "/",
@@ -63,9 +65,10 @@ export const login = async (req, res, next) => {
 
 export const logout = (req, res, next) => {
   try {
+    const isProd = process.env.NODE_ENV === "production";
     res.clearCookie("token", {
-      secure: false,
-      sameSite: "strict",
+      secure: isProd,
+      sameSite: isProd ? "none" : "strict",
       maxAge: 0,
       httpOnly: true,
       path: "/",
@@ -207,9 +210,10 @@ export const googleAuth = async (req, res, next) => {
     }
 
     const token = generateToken(user._id);
+    const isProd = process.env.NODE_ENV === "production";
     res.cookie("token", token, {
-      secure: false,
-      sameSite: "strict",
+      secure: isProd,
+      sameSite: isProd ? "none" : "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000,
       httpOnly: true,
       path: "/",
